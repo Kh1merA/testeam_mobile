@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 final mainTheme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+  colorScheme:
+      ColorScheme.fromSeed(seedColor: const Color.fromRGBO(73, 66, 228, 1)),
   useMaterial3: true,
   textTheme: TextTheme(
     titleLarge: TextStyle(
@@ -9,6 +10,11 @@ final mainTheme = ThemeData(
         fontSize: 36,
         fontWeight: FontWeight.w700,
         color: Color.fromRGBO(73, 66, 228, 1)),
+    titleMedium: TextStyle(
+        fontFamily: "OpenSans",
+        fontSize: 28,
+        fontWeight: FontWeight.w700,
+        color: Color.fromRGBO(44, 44, 44, 1)),
     titleSmall: TextStyle(
         fontFamily: "OpenSans",
         fontSize: 16,

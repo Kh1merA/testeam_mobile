@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:testeam_mobile_application/theme/theme.dart';
 
 class login_page extends StatelessWidget {
+  const login_page({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 132,
           ),
           Container(
@@ -18,21 +19,21 @@ class login_page extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 56,
           ),
-          inputLabel(
+          const inputLabel(
             inputIcon: Icons.email,
             inputText: 'Email',
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          inputLabel(
+          const inputLabel(
             inputIcon: Icons.lock,
             inputText: 'Password',
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Padding(
@@ -45,7 +46,7 @@ class login_page extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 74,
           ),
           Container(
@@ -53,7 +54,7 @@ class login_page extends StatelessWidget {
             width: 160,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
-              color: Color.fromRGBO(73, 66, 228, 1),
+              color: const Color.fromRGBO(73, 66, 228, 1),
             ),
             child: Center(
                 child: Text(
@@ -71,11 +72,11 @@ class inputLabel extends StatelessWidget {
   final inputIcon;
   final inputText;
 
-  inputLabel({super.key, required this.inputIcon, required this.inputText});
+  const inputLabel({super.key, required this.inputIcon, required this.inputText});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 350,
       height: 40,
       child: Center(
@@ -90,9 +91,9 @@ class inputLabel extends StatelessWidget {
             prefixIcon: Icon(inputIcon),
             hintText: inputText,
             hintStyle: Theme.of(context).textTheme.titleSmall,
-            contentPadding: EdgeInsets.symmetric(vertical: 12.0),
+            contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                   width: 1, color: Color.fromRGBO(173, 173, 173, 0.3)),
               borderRadius: BorderRadius.circular(28),
             ),
