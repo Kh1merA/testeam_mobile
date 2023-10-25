@@ -31,5 +31,34 @@ final mainTheme = ThemeData(
       fontWeight: FontWeight.w700,
       color: Colors.white,
     ),
+    labelMedium: TextStyle(
+      fontSize: 14,
+      fontFamily: "OpenSans",
+      fontWeight: FontWeight.w400,
+      color: Colors.black,
+    ),
+  ),
+);
+
+TextStyle appBarText = const TextStyle(
+  fontSize: 20,
+  fontFamily: "OpenSans",
+  fontWeight: FontWeight.w400,
+  color: Colors.black,
+);
+
+TextStyle appBarTitleText = const TextStyle(
+  fontFamily: "OpenSans",
+  fontSize: 46,
+  fontWeight: FontWeight.w700,
+  color: Color.fromRGBO(73, 66, 228, 1),
+);
+
+final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+  backgroundColor: const Color.fromRGBO(73, 66, 228, 1),
+  minimumSize: const Size(160, 50),
+  padding: const EdgeInsets.symmetric(horizontal: 16),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(18)),
   ),
 );

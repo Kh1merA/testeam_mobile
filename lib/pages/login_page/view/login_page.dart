@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.dart';
+import 'package:testeam_mobile_application/theme/theme.dart';
 
 class login_page extends StatelessWidget {
   const login_page({super.key});
@@ -36,70 +38,36 @@ class login_page extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Padding(
+          Container(
             padding: const EdgeInsets.only(right: 35.0),
             child: Align(
               alignment: Alignment.centerRight,
-              child: Text(
-                'Forgot your password?',
-                style: Theme.of(context).textTheme.labelSmall,
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed('/recovery_password');
+                },
+                child: Text(
+                  'Forgot your password?',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
               ),
             ),
           ),
           const SizedBox(
             height: 74,
           ),
-          Container(
-            height: 50,
-            width: 160,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
-              color: const Color.fromRGBO(73, 66, 228, 1),
-            ),
-            child: Center(
-                child: Text(
+          TextButton(
+            style: flatButtonStyle,
+            onPressed: () {
+              Navigator.of(context).pushNamed('/home_page');
+            },
+            child: Text(
               'Confirm',
               style: Theme.of(context).textTheme.labelLarge,
-            )),
-          )
+            ),
+          ),
         ],
       ), //Stack
     ); //Scaffold
-  }
-}
-
-class inputLabel extends StatelessWidget {
-  final inputIcon;
-  final inputText;
-
-  const inputLabel({super.key, required this.inputIcon, required this.inputText});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 350,
-      height: 40,
-      child: Center(
-          child: // Note: Same code is applied for the TextFormField as well
-              Material(
-        elevation: 6,
-        shadowColor: Colors.black,
-        borderRadius: BorderRadius.circular(28),
-        child: TextField(
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            prefixIcon: Icon(inputIcon),
-            hintText: inputText,
-            hintStyle: Theme.of(context).textTheme.titleSmall,
-            contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
-            enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                  width: 1, color: Color.fromRGBO(173, 173, 173, 0.3)),
-              borderRadius: BorderRadius.circular(28),
-            ),
-          ),
-        ),
-      )),
-    );
   }
 }
