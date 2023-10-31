@@ -62,3 +62,13 @@ final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     borderRadius: BorderRadius.all(Radius.circular(18)),
   ),
 );
+
+TextStyle profileTitleText = const TextStyle(
+  fontSize: 20,
+  fontFamily: "OpenSans",
+  fontWeight: FontWeight.w700,
+  color: Colors.black,
+);
+
+IconThemeData iconProfileTheme =
+    IconThemeData(size: 30.0, color: Color.fromRGBO(73, 66, 228, 1));
