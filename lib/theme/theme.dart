@@ -47,6 +47,13 @@ TextStyle appBarText = const TextStyle(
   color: Colors.black,
 );
 
+TextStyle textTitle = const TextStyle(
+  fontSize: 14,
+  fontFamily: "OpenSans",
+  fontWeight: FontWeight.w600,
+  color: Colors.black,
+);
+
 TextStyle appBarTitleText = const TextStyle(
   fontFamily: "OpenSans",
   fontSize: 46,
@@ -56,6 +63,15 @@ TextStyle appBarTitleText = const TextStyle(
 
 final ButtonStyle flatButtonStyle = TextButton.styleFrom(
   backgroundColor: const Color.fromRGBO(73, 66, 228, 1),
+  minimumSize: const Size(160, 50),
+  padding: const EdgeInsets.symmetric(horizontal: 16),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(18)),
+  ),
+);
+
+final ButtonStyle blackFlatButtonStyle = TextButton.styleFrom(
+  backgroundColor: Color.fromARGB(255, 0, 0, 0),
   minimumSize: const Size(160, 50),
   padding: const EdgeInsets.symmetric(horizontal: 16),
   shape: const RoundedRectangleBorder(
