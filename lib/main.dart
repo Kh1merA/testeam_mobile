@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       theme: mainTheme,
       initialRoute: '/',
       routes: routes,
+      // home: const edit_user_password(),
     );
   }
 }

@@ -88,3 +88,10 @@ TextStyle profileTitleText = const TextStyle(
 
 IconThemeData iconProfileTheme =
     IconThemeData(size: 30.0, color: Color.fromRGBO(73, 66, 228, 1));
+
+TextStyle editUserPasswordStyle = const TextStyle(
+  fontSize: 14,
+  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.w500,
+  color: Color.fromRGBO(173, 173, 173, 1),
+);
