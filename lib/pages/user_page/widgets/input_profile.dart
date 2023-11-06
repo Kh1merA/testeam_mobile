@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class inputProfile extends StatelessWidget {
-  final inputText;
+  final TextEditingController controller;
 
-  inputProfile({super.key, required this.inputText});
+  inputProfile(
+      {super.key,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _textEditingController =
-        TextEditingController(text: inputText);
     return SizedBox(
       width: 350,
       height: 40,
@@ -20,7 +20,7 @@ class inputProfile extends StatelessWidget {
         borderRadius: BorderRadius.circular(28),
         child: TextField(
           keyboardType: TextInputType.text,
-          controller: _textEditingController,
+          controller: controller,
           decoration: InputDecoration(
             hintStyle: Theme.of(context).textTheme.titleSmall,
             contentPadding:

@@ -9,6 +9,7 @@ class edit_user_password extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late TextEditingController _naPohui = TextEditingController();
     return Scaffold(
       body: Column(
         children: [
@@ -53,7 +54,9 @@ class edit_user_password extends StatelessWidget {
                           )
                         ],
                       )),
-                  inputProfile(inputText: ''),
+                  inputProfile(
+                    controller: _naPohui,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -68,7 +71,9 @@ class edit_user_password extends StatelessWidget {
                           )
                         ],
                       )),
-                  inputProfile(inputText: ''),
+                  inputProfile(
+                    controller: _naPohui,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -83,7 +88,9 @@ class edit_user_password extends StatelessWidget {
                           )
                         ],
                       )),
-                  inputProfile(inputText: ''),
+                  inputProfile(
+                    controller: _naPohui,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),

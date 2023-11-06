@@ -80,7 +80,7 @@ final ButtonStyle blackFlatButtonStyle = TextButton.styleFrom(
 );
 
 TextStyle profileTitleText = const TextStyle(
-  fontSize: 20,
+  fontSize: 36,
   fontFamily: "OpenSans",
   fontWeight: FontWeight.w700,
   color: Colors.black,

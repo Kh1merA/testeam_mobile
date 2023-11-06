@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testeam_mobile_application/connections/connection.dart';
+import 'package:testeam_mobile_application/pages/home_page/view/home_page.dart';
 import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
 
@@ -15,16 +16,26 @@ class _LoginPageState extends State<LoginPage> {
 
   AuthRequest auth = new AuthRequest();
   String additionalText = '';
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  User user = new User(
+      name: 'name',
+      email: 'email',
+      phone: 'phone',
+      companyName: 'companyName',
+      position: 'position',
+      token: '');
 
   Future<bool> attemptLogin(email, password) async {
     try {
       final token = await auth.login(email, password);
       if (token != null) {
         print('Успешно вошли! Токен: $token');
+        user.token = token;
+        user.getUserInfo(token);
         return true;
       } else {
         print('Ошибка входа');
-        requestStatusNotifier.value = 'Ошибка входа';
         return false;
       }
     } catch (e) {
@@ -38,9 +49,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
-
     return Scaffold(
         body: Form(
       key: _authKey,
@@ -115,7 +123,14 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () async {
               if (await attemptLogin(
                   _emailController.text, _passwordController.text)) {
-                Navigator.of(context).pushNamed('/home_page');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomePage(data: user)));
+                requestStatusNotifier.value = '200';
+                setState(() {
+                  additionalText = '';
+                });
               } else {
                 switch (requestStatusNotifier.value) {
                   case '400':

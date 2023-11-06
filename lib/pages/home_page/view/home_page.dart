@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:testeam_mobile_application/connections/connection.dart';
+import 'package:testeam_mobile_application/pages/user_page/view/user_page.dart';
 import 'dart:ui';
 
+import 'package:testeam_mobile_application/theme/theme.dart';
+
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  User data;
+  HomePage({super.key, required this.data});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -50,6 +55,22 @@ class _HomePageState extends State<HomePage> {
           'assets/images/tesTeam.png',
           height: Theme.of(context).textTheme.titleMedium!.fontSize!,
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.account_circle_outlined,
+              color: Color.fromRGBO(73, 66, 228, 1),
+              size: 30.0,
+            ),
+            tooltip: 'Show user account',
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => user_page(userData: widget.data)));
+            },
+          ),
+        ],
       ),
       body: PageView.builder(
         physics: const PageScrollPhysics(),
