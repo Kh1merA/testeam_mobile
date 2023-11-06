@@ -3,30 +3,34 @@ import 'package:testeam_mobile_application/connections/connection.dart';
 import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
 
-class login_page extends StatelessWidget {
-  login_page({super.key});
+class LoginPage extends StatefulWidget {
+  LoginPage({super.key});
 
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final ValueNotifier<String> requestStatusNotifier = ValueNotifier<String>('');
 
   AuthRequest auth = new AuthRequest();
-
-  var requestStatus;
+  String additionalText = '';
 
   Future<bool> attemptLogin(email, password) async {
     try {
       final token = await auth.login(email, password);
       if (token != null) {
         print('Успешно вошли! Токен: $token');
-        return true; // Вход успешен
+        return true;
       } else {
         print('Ошибка входа');
         requestStatusNotifier.value = 'Ошибка входа';
-        return false; // Вход неуспешен
+        return false;
       }
     } catch (e) {
       print(e);
       requestStatusNotifier.value = e.toString();
-      return false; // Вход неуспешен
+      return false;
     }
   }
 
@@ -72,7 +76,19 @@ class login_page extends StatelessWidget {
             requestStatusNotifier: requestStatusNotifier,
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
+          ),
+          if (additionalText.isNotEmpty)
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 40.0),
+              child: Text(
+                additionalText,
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+          const SizedBox(
+            height: 10,
           ),
           Container(
             padding: const EdgeInsets.only(right: 35.0),
@@ -99,7 +115,30 @@ class login_page extends StatelessWidget {
                   _emailController.text, _passwordController.text)) {
                 Navigator.of(context).pushNamed('/home_page');
               } else {
-                // setState(() {});
+                switch (requestStatusNotifier.value) {
+                  case '400':
+                    setState(() {
+                      additionalText = 'Field validation error';
+                    });
+                    break;
+                  case '404':
+                    setState(() {
+                      additionalText =
+                          'User email is not registered in the system';
+                    });
+                    break;
+                  case '422':
+                    setState(() {
+                      additionalText =
+                          'One or more fields were passed incorrectly. Field validation error';
+                    });
+                    break;
+                  default:
+                    setState(() {
+                      additionalText = '';
+                    });
+                    break;
+                }
               }
             },
             child: Text(

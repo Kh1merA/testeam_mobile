@@ -29,13 +29,12 @@ class _inputLabelState extends State<inputLabel> {
   }
 
   void _onRequestStatusChange() {
-    setState(() {}); // Перерисовать InputLabel при изменении requestStatus
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     InputDecoration decoration;
-    String additionalText = '';
 
     switch (widget.requestStatusNotifier.value) {
       case '400':
@@ -51,7 +50,6 @@ class _inputLabelState extends State<inputLabel> {
             borderRadius: BorderRadius.circular(28),
           ),
         );
-        additionalText = 'Field validation error';
         break;
       case '404':
         decoration = InputDecoration(
@@ -66,7 +64,6 @@ class _inputLabelState extends State<inputLabel> {
             borderRadius: BorderRadius.circular(28),
           ),
         );
-        additionalText = 'User email is not registered in the system';
         break;
       case '422':
         decoration = InputDecoration(
@@ -80,14 +77,6 @@ class _inputLabelState extends State<inputLabel> {
                   width: 1, color: Color.fromRGBO(255, 5, 5, 1)),
               borderRadius: BorderRadius.circular(28),
             ));
-        SizedBox(
-          height: 20,
-        );
-        Column(
-          children: [Text('Field validation error')],
-        );
-        additionalText =
-            'One or more fields were passed incorrectly. Field validation error';
         break;
       default:
         decoration = InputDecoration(
@@ -122,15 +111,6 @@ class _inputLabelState extends State<inputLabel> {
             ),
           ),
         ),
-        if (additionalText.isNotEmpty)
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 40.0),
-            child: Text(
-              additionalText,
-              style: TextStyle(color: Colors.red),
-            ),
-          ),
       ],
     );
   }
