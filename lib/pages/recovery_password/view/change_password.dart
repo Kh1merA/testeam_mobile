@@ -3,10 +3,13 @@ import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.
 import 'package:testeam_mobile_application/theme/theme.dart';
 
 class change_password extends StatelessWidget {
-  const change_password({super.key});
+   change_password({super.key});
+
+  final ValueNotifier<String> requestStatusNotifier = ValueNotifier<String>('');
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _controller = TextEditingController();
     return Scaffold(
       body: Column(
         children: [
@@ -56,16 +59,20 @@ class change_password extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const inputLabel(
+          inputLabel(
             inputIcon: Icons.lock,
             inputText: 'New password',
+            controller: _controller,
+            requestStatusNotifier: requestStatusNotifier,
           ),
           const SizedBox(
             height: 14,
           ),
-          const inputLabel(
+          inputLabel(
             inputIcon: Icons.lock,
             inputText: 'Confirm password',
+            controller: _controller,
+            requestStatusNotifier: requestStatusNotifier,
           ),
           const SizedBox(
             height: 40,

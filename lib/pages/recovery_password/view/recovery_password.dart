@@ -7,6 +7,9 @@ class recovery_password extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _controller = TextEditingController();
+    final ValueNotifier<String> requestStatusNotifier =
+        ValueNotifier<String>('');
     return Scaffold(
       body: Column(
         children: [
@@ -56,9 +59,11 @@ class recovery_password extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const inputLabel(
+          inputLabel(
             inputIcon: Icons.email,
             inputText: 'Email',
+            controller: _controller,
+            requestStatusNotifier: requestStatusNotifier,
           ),
           const SizedBox(
             height: 70,

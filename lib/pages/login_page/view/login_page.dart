@@ -1,14 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:testeam_mobile_application/connections/connection.dart';
 import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
 
 class login_page extends StatelessWidget {
-  const login_page({super.key});
+  login_page({super.key});
+
+  final ValueNotifier<String> requestStatusNotifier = ValueNotifier<String>('');
+
+  AuthRequest auth = new AuthRequest();
+
+  var requestStatus;
+
+  Future<bool> attemptLogin(email, password) async {
+    try {
+      final token = await auth.login(email, password);
+      if (token != null) {
+        print('Успешно вошли! Токен: $token');
+        return true; // Вход успешен
+      } else {
+        print('Ошибка входа');
+        requestStatusNotifier.value = 'Ошибка входа';
+        return false; // Вход неуспешен
+      }
+    } catch (e) {
+      print(e);
+      requestStatusNotifier.value = e.toString();
+      return false; // Вход неуспешен
+    }
+  }
+
+  final _authKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+
     return Scaffold(
-      body: Column(
+        body: Form(
+      key: _authKey,
+      child: Column(
         children: [
           const SizedBox(
             height: 132,
@@ -24,16 +56,20 @@ class login_page extends StatelessWidget {
           const SizedBox(
             height: 56,
           ),
-          const inputLabel(
+          inputLabel(
             inputIcon: Icons.email,
             inputText: 'Email',
+            controller: _emailController,
+            requestStatusNotifier: requestStatusNotifier,
           ),
           const SizedBox(
             height: 20,
           ),
-          const inputLabel(
+          inputLabel(
             inputIcon: Icons.lock,
             inputText: 'Password',
+            controller: _passwordController,
+            requestStatusNotifier: requestStatusNotifier,
           ),
           const SizedBox(
             height: 20,
@@ -58,8 +94,13 @@ class login_page extends StatelessWidget {
           ),
           TextButton(
             style: flatButtonStyle,
-            onPressed: () {
-              Navigator.of(context).pushNamed('/home_page');
+            onPressed: () async {
+              if (await attemptLogin(
+                  _emailController.text, _passwordController.text)) {
+                Navigator.of(context).pushNamed('/home_page');
+              } else {
+                // setState(() {});
+              }
             },
             child: Text(
               'Confirm',
@@ -67,7 +108,9 @@ class login_page extends StatelessWidget {
             ),
           ),
         ],
-      ), //Stack
-    ); //Scaffold
+      ),
+    )
+        //Stack
+        ); //Scaffold
   }
 }

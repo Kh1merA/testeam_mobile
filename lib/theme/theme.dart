@@ -95,3 +95,16 @@ TextStyle editUserPasswordStyle = const TextStyle(
   fontWeight: FontWeight.w500,
   color: Color.fromRGBO(173, 173, 173, 1),
 );
+
+InputDecoration errorInputDecoration = InputDecoration(
+  fillColor: Color.fromRGBO(255, 0, 0, 1),
+  filled: true,
+  labelStyle: TextStyle(color: Colors.red),
+);
+
+TextStyle validatorError = const TextStyle(
+  fontSize: 14,
+  fontFamily: "OpenSans",
+  fontWeight: FontWeight.w700,
+  color: Colors.red,
+);
