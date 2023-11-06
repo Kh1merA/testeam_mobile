@@ -8,6 +8,7 @@ class inputLabel extends StatefulWidget {
   final String inputText;
   final TextEditingController controller;
   final ValueNotifier<String> requestStatusNotifier;
+  final bool isPassword;
 
   inputLabel({
     Key? key,
@@ -15,6 +16,7 @@ class inputLabel extends StatefulWidget {
     required this.inputText,
     required this.controller,
     required this.requestStatusNotifier,
+    required this.isPassword,
   }) : super(key: key);
 
   @override
@@ -104,6 +106,7 @@ class _inputLabelState extends State<inputLabel> {
               shadowColor: Colors.black,
               borderRadius: BorderRadius.circular(28),
               child: TextFormField(
+                obscureText: widget.isPassword,
                 controller: widget.controller,
                 keyboardType: TextInputType.text,
                 decoration: decoration,

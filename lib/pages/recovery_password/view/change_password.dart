@@ -64,6 +64,7 @@ class change_password extends StatelessWidget {
             inputText: 'New password',
             controller: _controller,
             requestStatusNotifier: requestStatusNotifier,
+            isPassword: false,
           ),
           const SizedBox(
             height: 14,
@@ -73,6 +74,7 @@ class change_password extends StatelessWidget {
             inputText: 'Confirm password',
             controller: _controller,
             requestStatusNotifier: requestStatusNotifier,
+            isPassword: false,
           ),
           const SizedBox(
             height: 40,

@@ -65,6 +65,7 @@ class _LoginPageState extends State<LoginPage> {
             inputText: 'Email',
             controller: _emailController,
             requestStatusNotifier: requestStatusNotifier,
+            isPassword: false,
           ),
           const SizedBox(
             height: 20,
@@ -74,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
             inputText: 'Password',
             controller: _passwordController,
             requestStatusNotifier: requestStatusNotifier,
+            isPassword: true,
           ),
           const SizedBox(
             height: 10,

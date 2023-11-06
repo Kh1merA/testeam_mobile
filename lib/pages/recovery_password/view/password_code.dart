@@ -63,6 +63,7 @@ class password_code extends StatelessWidget {
             inputText: 'Verification code',
             controller: _controller,
             requestStatusNotifier: requestStatusNotifier,
+            isPassword: false
           ),
           const SizedBox(
             height: 14,

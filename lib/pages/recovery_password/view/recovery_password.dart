@@ -60,11 +60,11 @@ class recovery_password extends StatelessWidget {
             height: 10,
           ),
           inputLabel(
-            inputIcon: Icons.email,
-            inputText: 'Email',
-            controller: _controller,
-            requestStatusNotifier: requestStatusNotifier,
-          ),
+              inputIcon: Icons.email,
+              inputText: 'Email',
+              controller: _controller,
+              requestStatusNotifier: requestStatusNotifier,
+              isPassword: false),
           const SizedBox(
             height: 70,
           ),
