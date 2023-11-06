@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:testeam_mobile_application/pages/home_page/view/home_page.dart';
 import 'package:testeam_mobile_application/pages/user_page/view/view.dart';
 import 'package:testeam_mobile_application/pages/user_page/widgets/profile_row.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
@@ -15,6 +16,16 @@ class user_page extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            // Здесь установите свой собственный маршрут, на который хотите перейти
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomePage(data: userData)));
+          },
+        ),
         backgroundColor:
             Theme.of(context).colorScheme.background.withOpacity(0.8),
         surfaceTintColor: Colors.transparent,

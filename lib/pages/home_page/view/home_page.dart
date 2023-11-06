@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testeam_mobile_application/connections/connection.dart';
+import 'package:testeam_mobile_application/pages/login_page/view/login_page.dart';
 import 'package:testeam_mobile_application/pages/user_page/view/user_page.dart';
 import 'dart:ui';
 
@@ -39,6 +40,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.exit_to_app),
+          onPressed: () {
+            // Здесь установите свой собственный маршрут, на который хотите перейти
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          },
+        ),
         backgroundColor:
             Theme.of(context).colorScheme.background.withOpacity(0.8),
         surfaceTintColor: Colors.transparent,

@@ -75,6 +75,18 @@ class _editprofileState extends State<edit_profile> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            // Здесь установите свой собственный маршрут, на который хотите перейти
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        user_page(userData: widget.userData)));
+            ;
+          },
+        ),
         backgroundColor:
             Theme.of(context).colorScheme.background.withOpacity(0.8),
         surfaceTintColor: Colors.transparent,
