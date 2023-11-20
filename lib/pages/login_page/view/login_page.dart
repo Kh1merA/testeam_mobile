@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testeam_mobile_application/connections/connection.dart';
 import 'package:testeam_mobile_application/pages/home_page/view/home_page.dart';
 import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.dart';
@@ -13,7 +16,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final ValueNotifier<String> requestStatusNotifier = ValueNotifier<String>('');
-
   AuthRequest auth = new AuthRequest();
   String additionalText = '';
   final TextEditingController _emailController = TextEditingController();
@@ -26,13 +28,15 @@ class _LoginPageState extends State<LoginPage> {
       position: 'position',
       token: '');
 
-  Future<bool> attemptLogin(email, password) async {
+  Future<bool> attemptLogin(String email, String password) async {
     try {
       final token = await auth.login(email, password);
       if (token != null) {
         print('Успешно вошли! Токен: $token');
         user.token = token;
-        user.getUserInfo(token);
+        await user.getUserInfo(token);
+        print('Успешно вошли! Токен: $user');
+        _saveToken(token, user);
         return true;
       } else {
         print('Ошибка входа');
@@ -43,6 +47,13 @@ class _LoginPageState extends State<LoginPage> {
       requestStatusNotifier.value = e.toString();
       return false;
     }
+  }
+
+  _saveToken(String token, User user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('token', token);
+    prefs.setString('user', json.encode(user.toJson()));
+    print(json.encode(user.toJson()));
   }
 
   final _authKey = GlobalKey<FormState>();
@@ -123,10 +134,8 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () async {
               if (await attemptLogin(
                   _emailController.text, _passwordController.text)) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(data: user)));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
                 requestStatusNotifier.value = '200';
                 setState(() {
                   additionalText = '';

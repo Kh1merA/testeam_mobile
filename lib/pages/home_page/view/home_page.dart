@@ -7,8 +7,7 @@ import 'dart:ui';
 import 'package:testeam_mobile_application/theme/theme.dart';
 
 class HomePage extends StatefulWidget {
-  User data;
-  HomePage({super.key, required this.data});
+  HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -73,10 +72,8 @@ class _HomePageState extends State<HomePage> {
             ),
             tooltip: 'Show user account',
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => user_page(userData: widget.data)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => user_page()));
             },
           ),
         ],

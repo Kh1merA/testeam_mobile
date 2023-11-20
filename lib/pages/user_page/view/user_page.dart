@@ -1,15 +1,59 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testeam_mobile_application/pages/home_page/view/home_page.dart';
 import 'package:testeam_mobile_application/pages/user_page/view/view.dart';
 import 'package:testeam_mobile_application/pages/user_page/widgets/profile_row.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
 import 'package:testeam_mobile_application/connections/connection.dart';
 
-class user_page extends StatelessWidget {
-  User userData;
-  user_page({super.key, required this.userData});
+class user_page extends StatefulWidget {
+  const user_page({Key? key}) : super(key: key);
+
+  @override
+  _UserPageState createState() => _UserPageState();
+}
+
+class _UserPageState extends State<user_page> {
+  late User userData;
+
+  @override
+  void initState() {
+    super.initState();
+    userData = User(
+      name: 'Default Name',
+      email: 'default@email.com',
+      phone: '123456789',
+      companyName: 'Default Company',
+      position: 'Default Position',
+      token: 'default_token',
+    );
+    _loadUser();
+  }
+
+  _loadUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userString = prefs.getString('user');
+    print('User String: $userString');
+    if (userString != null && userString.isNotEmpty) {
+      setState(() {
+        userData = User.fromJson(json.decode(userString));
+      });
+    } else {
+      setState(() {
+        userData = User(
+          name: 'Default Name',
+          email: 'default@email.com',
+          phone: '123456789',
+          companyName: 'Default Company',
+          position: 'Default Position',
+          token: 'default_token',
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +63,9 @@ class user_page extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Здесь установите свой собственный маршрут, на который хотите перейти
+            // Set your own route to navigate to
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomePage(data: userData)));
+                context, MaterialPageRoute(builder: (context) => HomePage()));
           },
         ),
         backgroundColor:
@@ -109,8 +151,7 @@ class user_page extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  edit_profile(userData: userData)));
+                              builder: (context) => edit_profile()));
                     },
                     child: Text(
                       'Edit Profile',
@@ -123,7 +164,6 @@ class user_page extends StatelessWidget {
           ),
         ],
       ),
-      //Stack
-    ); //Scaffold
+    );
   }
 }

@@ -9,15 +9,38 @@ class User {
   String position;
   String token;
 
-  User(
-      {required this.name,
-      required this.email,
-      required this.phone,
-      required this.companyName,
-      required this.position,
-      required this.token});
+  User({
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.companyName,
+    required this.position,
+    required this.token,
+  });
 
-  void getUserInfo(token) async {
+  Map<String, dynamic> toJson() {
+    return {
+      'username': name,
+      'email': email,
+      'phone_number': phone,
+      'title': companyName,
+      'position': position,
+      'token': token,
+    };
+  }
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      name: json['username'],
+      email: json['email'],
+      phone: json['phone_number'],
+      companyName: json['title'],
+      position: json['position'],
+      token: json['token'],
+    );
+  }
+
+  Future<void> getUserInfo(String token) async {
     const apiUrl =
         'http://ec2-3-68-94-147.eu-central-1.compute.amazonaws.com:8000/profile/';
 
@@ -35,12 +58,13 @@ class User {
       name = responseData['name'];
       email = responseData['email'];
       phone = responseData['phone_number'];
-      // companyName = responseData['companies']['title'];
-      // position = responseData['companies']['role'];
-      companyName = 'Valorant';
-      position = 'Employee';
+      final company = responseData['companies'][0];
+      companyName = company['title'];
+      position = company['role'];
+      // companyName = 'Valorant';
+      // position = 'Healer';
     } else {
-      throw response.statusCode;
+      throw Exception('Failed to load user info');
     }
   }
 }

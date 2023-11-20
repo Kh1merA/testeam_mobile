@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testeam_mobile_application/connections/connection.dart';
 import 'package:testeam_mobile_application/pages/user_page/view/user_page.dart';
 import 'package:testeam_mobile_application/pages/user_page/widgets/input_profile.dart';
@@ -9,8 +11,16 @@ import 'package:testeam_mobile_application/theme/theme.dart';
 import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.dart';
 
 class edit_profile extends StatefulWidget {
-  User userData;
-  edit_profile({super.key, required this.userData});
+  late User userData;
+  edit_profile({super.key});
+
+  _loadUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userString = prefs.getString('user') ?? "";
+    if (userString.isNotEmpty) {
+      userData = User.fromJson(json.decode(userString));
+    }
+  }
 
   @override
   _editprofileState createState() => _editprofileState();
@@ -80,10 +90,7 @@ class _editprofileState extends State<edit_profile> {
           onPressed: () {
             // Здесь установите свой собственный маршрут, на который хотите перейти
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        user_page(userData: widget.userData)));
+                context, MaterialPageRoute(builder: (context) => user_page()));
             ;
           },
         ),
@@ -176,8 +183,7 @@ class _editprofileState extends State<edit_profile> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      user_page(userData: widget.userData)));
+                                  builder: (context) => user_page()));
                         },
                         child: Text(
                           'Cancel',
@@ -193,8 +199,7 @@ class _editprofileState extends State<edit_profile> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      user_page(userData: widget.userData)));
+                                  builder: (context) => user_page()));
                         },
                         child: Text(
                           'Save',
