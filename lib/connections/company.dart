@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,6 +14,26 @@ class Company {
       required this.ownerEmail,
       required this.ownerPhone,
       required this.users});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'ownerEmail': ownerEmail,
+      'ownerPhone': ownerPhone,
+      'ownerName': ownerName,
+      'users': users,
+    };
+  }
+
+  factory Company.fromJson(Map<String, dynamic> json) {
+    return Company(
+      title: json['title'],
+      ownerEmail: json['ownerEmail'],
+      ownerPhone: json['ownerPhone'],
+      ownerName: json['ownerName'],
+      users: json['users'],
+    );
+  }
 
   void getUserInfo(token) async {
     const apiUrl =

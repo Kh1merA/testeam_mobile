@@ -108,3 +108,47 @@ TextStyle validatorError = const TextStyle(
   fontWeight: FontWeight.w700,
   color: Colors.red,
 );
+
+TextStyle companyNameTextStyle = const TextStyle(
+  fontSize: 20,
+  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.w800,
+  color: Colors.white,
+);
+
+TextStyle companyAmountWorkersTextStyle = const TextStyle(
+  fontSize: 10,
+  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.w100,
+  color: Colors.white,
+);
+
+final TextStyle customDropDownTextStyle = TextStyle(
+  color: Colors.black,
+  fontSize: 12.0,
+);
+
+const double customFieldWidth = 50;
+const double customFieldHeight = 30;
+
+final InputDecoration customDropDownInputDecoration = InputDecoration(
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(14.0),
+    borderSide: BorderSide(color: Colors.black),
+  ),
+  labelText: 'Position',
+);
+
+TextStyle textSearchFieldStyle = TextStyle(
+    fontFamily: 'OpenSans',
+    fontSize: 12,
+    color: Color.fromRGBO(173, 173, 173, 150));
+
+TextStyle textCompanyTextStyle = TextStyle(
+    fontFamily: 'OpenSans', fontSize: 11, color: Color.fromRGBO(30, 30, 30, 1));
+
+TextStyle textCompanyItemsStyle = TextStyle(
+    fontFamily: 'OpenSans',
+    fontSize: 11,
+    fontWeight: FontWeight.w800,
+    color: Color.fromRGBO(30, 30, 30, 1));

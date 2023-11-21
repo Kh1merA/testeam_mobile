@@ -115,9 +115,16 @@ class _UserPageState extends State<user_page> {
                   const Divider(
                     color: Colors.black,
                   ),
-                  profileRow(
-                      inputIcon: Icon(Icons.domain),
-                      inputText: userData.companyName),
+                  Container(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/company_page');
+                      },
+                      child: profileRow(
+                          inputIcon: Icon(Icons.domain),
+                          inputText: userData.companyName),
+                    ),
+                  ),
                   const Divider(
                     color: Colors.black,
                   ),
