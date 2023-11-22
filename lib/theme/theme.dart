@@ -117,15 +117,15 @@ TextStyle companyNameTextStyle = const TextStyle(
 );
 
 TextStyle companyAmountWorkersTextStyle = const TextStyle(
-  fontSize: 10,
+  fontSize: 14,
   fontFamily: 'OpenSans',
-  fontWeight: FontWeight.w100,
+  fontWeight: FontWeight.w500,
   color: Colors.white,
 );
 
 final TextStyle customDropDownTextStyle = TextStyle(
   color: Colors.black,
-  fontSize: 12.0,
+  fontSize: 14.0,
 );
 
 const double customFieldWidth = 50;
@@ -133,22 +133,32 @@ const double customFieldHeight = 30;
 
 final InputDecoration customDropDownInputDecoration = InputDecoration(
   border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(14.0),
+    borderRadius: BorderRadius.circular(10.0),
     borderSide: BorderSide(color: Colors.black),
   ),
   labelText: 'Position',
 );
 
-TextStyle textSearchFieldStyle = TextStyle(
+TextStyle textSearchFieldStyle = const TextStyle(
     fontFamily: 'OpenSans',
-    fontSize: 12,
-    color: Color.fromRGBO(173, 173, 173, 150));
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: Colors.black);
 
-TextStyle textCompanyTextStyle = TextStyle(
-    fontFamily: 'OpenSans', fontSize: 11, color: Color.fromRGBO(30, 30, 30, 1));
+    InputDecoration inputSearchDecoration = InputDecoration(
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Color.fromRGBO(173, 173, 173, 150),
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+  );
 
-TextStyle textCompanyItemsStyle = TextStyle(
+TextStyle textCompanyTextStyle = const TextStyle(
+    fontFamily: 'OpenSans', fontSize: 14, color: Color.fromRGBO(30, 30, 30, 1));
+
+TextStyle textCompanyItemsStyle = const TextStyle(
     fontFamily: 'OpenSans',
-    fontSize: 11,
+    fontSize: 14,
     fontWeight: FontWeight.w800,
     color: Color.fromRGBO(30, 30, 30, 1));

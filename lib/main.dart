@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testeam_mobile_application/pages/company_page/view/company_page.dart';
 import 'package:testeam_mobile_application/pages/home_page/view/home_page.dart';
 import 'package:testeam_mobile_application/pages/user_page/view/user_page.dart';
 import 'package:testeam_mobile_application/pages/user_page/view/view.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: mainTheme,
       initialRoute: '/',
       routes: routes,
-      // home: const edit_user_password(),
+      // home: const company_page(),
     );
   }
 }

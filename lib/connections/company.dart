@@ -15,29 +15,9 @@ class Company {
       required this.ownerPhone,
       required this.users});
 
-  Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'ownerEmail': ownerEmail,
-      'ownerPhone': ownerPhone,
-      'ownerName': ownerName,
-      'users': users,
-    };
-  }
-
-  factory Company.fromJson(Map<String, dynamic> json) {
-    return Company(
-      title: json['title'],
-      ownerEmail: json['ownerEmail'],
-      ownerPhone: json['ownerPhone'],
-      ownerName: json['ownerName'],
-      users: json['users'],
-    );
-  }
-
-  void getUserInfo(token) async {
-    const apiUrl =
-        'http://ec2-3-68-94-147.eu-central-1.compute.amazonaws.com:8000/companies/13';
+  Future<void> getCompanyInfo(String token, String companyID) async {
+    String apiUrl =
+        'http://ec2-3-68-94-147.eu-central-1.compute.amazonaws.com:8000/companies/$companyID/';
 
     final response = await http.get(
       Uri.parse(apiUrl),
@@ -49,19 +29,13 @@ class Company {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = jsonDecode(response.body);
+      print(responseData);
 
       title = responseData['title'];
       ownerEmail = responseData['owner_email'];
       ownerPhone = responseData['owner_phone'];
-      // companyName = responseData['companies']['title'];
-      // position = responseData['companies']['role'];
       ownerName = responseData['owner_name'];
-      users = [
-        {"id": 0, "name": "Sage", "role": "Healer"},
-        {"id": 1, "name": "Omen", "role": "Smoker"},
-        {"id": 2, "name": "Reyna", "role": "Openfragger"},
-        {"id": 3, "name": "Iso", "role": "Man with default face"}
-      ];
+      users = responseData['users'];
     } else {
       throw response.statusCode;
     }

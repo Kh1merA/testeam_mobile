@@ -53,7 +53,6 @@ class _LoginPageState extends State<LoginPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('token', token);
     prefs.setString('user', json.encode(user.toJson()));
-    print(json.encode(user.toJson()));
   }
 
   final _authKey = GlobalKey<FormState>();
