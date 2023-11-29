@@ -11,73 +11,85 @@ import 'package:testeam_mobile_application/theme/theme.dart';
 import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.dart';
 
 class edit_profile extends StatefulWidget {
-  late User userData;
+  
   edit_profile({super.key});
-
-  _loadUser() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userString = prefs.getString('user') ?? "";
-    if (userString.isNotEmpty) {
-      userData = User.fromJson(json.decode(userString));
-    }
-  }
 
   @override
   _editprofileState createState() => _editprofileState();
 }
 
 class _editprofileState extends State<edit_profile> {
-  editUser edit = new editUser(name: '', phone: '');
-  late TextEditingController _nameController;
-  late TextEditingController _emailController;
-  late TextEditingController _phoneController;
+  late User userData;
+
+  _loadUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userString = prefs.getString('user');
+    print('User String: $userString');
+    if (userString != null && userString.isNotEmpty) {
+      setState(() {
+        userData = User.fromJson(json.decode(userString));
+      });
+    } else {
+      setState(() {
+        userData = User(
+          name: 'Default Name',
+          email: 'default@email.com',
+          phone: '123456789',
+          companyName: 'Default Company',
+          position: 'Default Position',
+          token: 'default_token',
+        );
+      });
+    }
+  }
+
+  _saveUser(User user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('user', json.encode(user.toJson()));
+  }
+
+  editUser edit = editUser(name: '', phone: '');
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   String _initialValueTextField1 = '';
-  String _initialValueTextField2 = '';
   String _initialValueTextField3 = '';
 
   @override
-  void initState() {
-    super.initState();
-    _nameController = TextEditingController();
-    _emailController = TextEditingController();
-    _phoneController = TextEditingController();
-
-    _initialValueTextField1 = widget.userData.name;
-    _initialValueTextField2 = widget.userData.email;
-    _initialValueTextField3 = widget.userData.phone;
+void initState() {
+  super.initState();
+  _loadUser().then((_) {
+    _initialValueTextField1 = userData.name;
+    _initialValueTextField3 = userData.phone;
 
     edit.name = _initialValueTextField1;
-    // edit.email = _initialValueTextField2;
     edit.phone = _initialValueTextField3;
 
     _nameController.text = _initialValueTextField1;
-    _emailController.text = _initialValueTextField2;
     _phoneController.text = _initialValueTextField3;
-  }
+
+    setState(() {});
+  });
+}
+
 
   void checkForChanges() {
     final currentNameTextField = _nameController.text;
-    final currentEmailTextField = _emailController.text;
     final currentPhoneTextField = _phoneController.text;
+
+    print(currentNameTextField);
 
     if (currentNameTextField != _initialValueTextField1) {
       print('TextField 1 был изменен: $currentNameTextField');
       edit.name = currentNameTextField;
-      widget.userData.name = currentNameTextField;
-    }
-
-    if (currentEmailTextField != _initialValueTextField2) {
-      print('TextField 2 был изменен: $currentEmailTextField');
-      // edit.email = currentEmailTextField;
-      // widget.userData.email = currentNameTextField;
+      userData.name = currentNameTextField;
     }
 
     if (currentPhoneTextField != _initialValueTextField3) {
       print('TextField 3 был изменен: $currentPhoneTextField');
       edit.phone = currentPhoneTextField;
-      widget.userData.phone = currentPhoneTextField;
-    }
+      userData.phone = currentPhoneTextField;
+    } 
   }
 
   @override
@@ -88,7 +100,6 @@ class _editprofileState extends State<edit_profile> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Здесь установите свой собственный маршрут, на который хотите перейти
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => user_page()));
             ;
@@ -141,23 +152,6 @@ class _editprofileState extends State<edit_profile> {
                   const SizedBox(
                     height: 20,
                   ),
-                  // Padding(
-                  //     padding: EdgeInsets.only(left: 20, bottom: 6),
-                  //     child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.start,
-                  //       children: [
-                  //         Text(
-                  //           'Email',
-                  //           style: textTitle,
-                  //         )
-                  //       ],
-                  //     )),
-                  // inputProfile(
-                  //   controller: _emailController,
-                  // ),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
                   Padding(
                       padding: EdgeInsets.only(left: 20, bottom: 6),
                       child: Row(
@@ -180,10 +174,7 @@ class _editprofileState extends State<edit_profile> {
                       TextButton(
                         style: blackFlatButtonStyle,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => user_page()));
+                          Navigator.of(context).pushNamed('/user_page');
                         },
                         child: Text(
                           'Cancel',
@@ -193,13 +184,11 @@ class _editprofileState extends State<edit_profile> {
                       SizedBox(width: 30),
                       TextButton(
                         style: flatButtonStyle,
-                        onPressed: () {
+                        onPressed: () async{
                           checkForChanges();
-                          edit.editUserFunc(widget.userData.token);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => user_page()));
+                          await edit.editUserFunc(userData.token);
+                          _saveUser(userData);
+                          Navigator.of(context).pushNamed('/user_page');
                         },
                         child: Text(
                           'Save',

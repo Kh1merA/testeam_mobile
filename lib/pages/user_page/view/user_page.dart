@@ -63,9 +63,7 @@ class _UserPageState extends State<user_page> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Set your own route to navigate to
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+            Navigator.of(context).pushNamed('/home_page');
           },
         ),
         backgroundColor:
@@ -143,10 +141,16 @@ class _UserPageState extends State<user_page> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text(
+                      InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/user_page/edit_password');
+                      },
+                      child: Text(
                         'Change password',
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
+                    ),
+                      
                     ],
                   ),
                   const SizedBox(

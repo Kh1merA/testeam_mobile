@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testeam_mobile_application/connections/company_profile.dart';
 import 'package:testeam_mobile_application/connections/connection.dart';
 import 'package:testeam_mobile_application/pages/home_page/view/home_page.dart';
 import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.dart';
@@ -16,17 +17,19 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final ValueNotifier<String> requestStatusNotifier = ValueNotifier<String>('');
-  AuthRequest auth = new AuthRequest();
+  AuthRequest auth = AuthRequest();
   String additionalText = '';
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  User user = new User(
+  User user = User(
       name: 'name',
       email: 'email',
       phone: 'phone',
       companyName: 'companyName',
       position: 'position',
       token: '');
+
+  CompanyProfile companyProfile = CompanyProfile(companyId: 0, title: '', role: '');
 
   Future<bool> attemptLogin(String email, String password) async {
     try {
@@ -35,8 +38,9 @@ class _LoginPageState extends State<LoginPage> {
         print('Успешно вошли! Токен: $token');
         user.token = token;
         await user.getUserInfo(token);
+        await companyProfile.getCompanyInfo(token);
         print('Успешно вошли! Токен: $user');
-        _saveToken(token, user);
+        _saveToken(token, user, companyProfile);
         return true;
       } else {
         print('Ошибка входа');
@@ -49,10 +53,11 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  _saveToken(String token, User user) async {
+  _saveToken(String token, User user, CompanyProfile companyProfile) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('token', token);
     prefs.setString('user', json.encode(user.toJson()));
+    prefs.setString('companyId', companyProfile.companyId.toString());
   }
 
   final _authKey = GlobalKey<FormState>();

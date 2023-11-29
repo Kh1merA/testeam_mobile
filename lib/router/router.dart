@@ -11,4 +11,7 @@ final routes = {
   '/recovery_password/enter_code_password/change_password': (context) =>
       change_password(),
   '/company_page': (context) => company_page(),
+  '/user_page': (context) => user_page(),
+  '/user_page/edit_password': (context) => edit_user_password(),
+  '/home_page': (context) => HomePage(),
 };

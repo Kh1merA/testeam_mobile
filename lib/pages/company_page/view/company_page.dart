@@ -18,7 +18,8 @@ class company_page extends StatefulWidget {
 class _UserPageState extends State<company_page> {
   late Company companyData;
   late String userToken;
-  
+  late String companyId;
+  String? filter = '';
 
   String? dropDownValue = 'Position';
 
@@ -42,7 +43,7 @@ class _UserPageState extends State<company_page> {
   _initializeState() async {
   await _loadToken();
   print('Token: $userToken');
-  await companyData.getCompanyInfo(userToken, '13');
+  await companyData.getCompanyInfo(userToken, companyId, '');
   setState(() {
   });
 }
@@ -50,10 +51,12 @@ class _UserPageState extends State<company_page> {
   _loadToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userString = prefs.getString('token');
+    String? companyString = prefs.getString('companyId');
     print('User String: $userString');
-    if (userString != null && userString.isNotEmpty) {
+    if (userString != null && userString.isNotEmpty && companyString != null) {
       setState(() {
           userToken = userString;
+          companyId = companyString;
       });
     }
   }
@@ -68,7 +71,7 @@ class _UserPageState extends State<company_page> {
               height: 100,
             ),
             Container(
-              width: 350, // Змініть ширину на весь доступний простір
+              width: 350, 
               height: 82,
               child: Padding(
                 padding:
@@ -86,7 +89,7 @@ class _UserPageState extends State<company_page> {
                     Row(
                       children: [
                         const Icon(Icons.person),
-                        Text(companyData.users.length.toString(),
+                        Text( companyData.users.length.toString(),
                             style: companyAmountWorkersTextStyle)
                       ],
                     ),
@@ -102,7 +105,7 @@ class _UserPageState extends State<company_page> {
                   )),
             ),
             Container(
-              width: 350, // Змініть ширину на весь доступний простір
+              width: 350, 
               height: 121,
               decoration: BoxDecoration(
                   color: Color.fromRGBO(225, 225, 225, 0),
@@ -186,6 +189,12 @@ class _UserPageState extends State<company_page> {
                               style: textSearchFieldStyle,
                               decoration: inputSearchDecoration,
                               textAlignVertical: TextAlignVertical.center,
+                              onChanged: (String filt) async{
+                                  await _loadToken();
+                                  await companyData.getCompanyInfo(userToken, companyId, filt);
+                                  setState(() {
+                                  });
+                              },
                             ),
                           ),
                     ),
@@ -208,8 +217,15 @@ class _UserPageState extends State<company_page> {
                         icon: Icon(Icons.arrow_downward),
                         iconSize: 24,
                         underline: SizedBox(),
-                        hint: Text(dropDownValue!, style: TextStyle(fontSize: 14, color: Colors.black),), // Це видалить лінію внизу
+                        hint: Text(dropDownValue!, style: TextStyle(fontSize: 14, color: Colors.black),), 
                         items: [
+                          DropdownMenuItem<String>(
+                            value: "",
+                            child: Text(
+                              'Position',
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
                           DropdownMenuItem<String>(
                             value: "Admin",
                             child: Text(
@@ -235,6 +251,7 @@ class _UserPageState extends State<company_page> {
                         onChanged: (String? newValue) {
                           setState(() {
                             dropDownValue = newValue;
+                            filter = dropDownValue;
                           });
                         },
                       ),
@@ -246,15 +263,25 @@ class _UserPageState extends State<company_page> {
             ),
             Container(
               height: 500,
-              child: ListView.separated(
+              child: ListView.builder(
                 itemCount: companyData.users.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                     title: Text(companyData.users[index]["name"]),
-                     trailing: Text(companyData.users[index]["role"]),
-                  );
+                  if (filter != '' && filter != null) {
+                    if (companyData.users[index]["role"] == filter?.toLowerCase()) {
+                      return ListTile(
+                        title: Text(companyData.users[index]["name"]),
+                        trailing: Text(companyData.users[index]["role"]),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  } else {
+                    return ListTile(
+                      title: Text(companyData.users[index]["name"]),
+                      trailing: Text(companyData.users[index]["role"]),
+                    );
+                  }
                 },
-                separatorBuilder: (BuildContext context, int index) => const Divider(),
               ),
             ),
           ],

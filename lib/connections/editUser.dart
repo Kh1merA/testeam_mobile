@@ -9,9 +9,10 @@ class editUser {
 
   Future<String?> editUserFunc(token) async {
     const apiUrl =
-        'http://ec2-3-68-94-147.eu-central-1.compute.amazonaws.com:8000/profile/edit';
+        'http://ec2-3-68-94-147.eu-central-1.compute.amazonaws.com:8000/profile/edit/';
 
-    final response = await http.patch(
+    try {
+      final response = await http.patch(
       Uri.parse(apiUrl),
       headers: <String, String>{
         'Content-Type': 'application/json',
@@ -24,11 +25,14 @@ class editUser {
     );
 
     if (response.statusCode == 200) {
-      // final Map<String, dynamic> responseData = jsonDecode(response.body);
-      // final String token = responseData['token'];
       throw response.statusCode;
     } else {
       throw response.statusCode;
     }
+    } catch (e) {
+      print(e);
+    }
+
+    
   }
 }

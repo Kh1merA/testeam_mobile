@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
       theme: mainTheme,
       initialRoute: '/',
       routes: routes,
-      // home: const company_page(),
     );
   }
 }
