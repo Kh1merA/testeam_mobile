@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testeam_mobile_application/connections/connection.dart';
+import 'package:testeam_mobile_application/pages/home_page/widgets/widgets.dart';
 import 'package:testeam_mobile_application/pages/login_page/view/login_page.dart';
 import 'package:testeam_mobile_application/pages/user_page/view/user_page.dart';
 import 'dart:ui';
@@ -26,10 +27,7 @@ class _HomePageState extends State<HomePage> {
         child: Text('1'),
       ),
       const Center(
-        child: Text('2'),
-      ),
-      const Center(
-        child: Text('3'),
+        child: test_page(),
       ),
       const Center(
         child: Text('4'),
@@ -108,11 +106,6 @@ class _HomePageState extends State<HomePage> {
                 icon: Image.asset('assets/images/tests.png',
                     width: Theme.of(context).textTheme.titleMedium!.fontSize!),
                 label: 'Tests',
-              ),
-              NavigationDestination(
-                icon: Image.asset('assets/images/calendar.png',
-                    width: Theme.of(context).textTheme.titleMedium!.fontSize!),
-                label: 'Calendar',
               ),
               NavigationDestination(
                 icon: Image.asset('assets/images/statistics.png',

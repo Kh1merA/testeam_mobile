@@ -145,14 +145,14 @@ TextStyle textSearchFieldStyle = const TextStyle(
     fontWeight: FontWeight.w500,
     color: Colors.black);
 
-    InputDecoration inputSearchDecoration = InputDecoration(
-      border: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Color.fromRGBO(173, 173, 173, 150),
-        ),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-  );
+InputDecoration inputSearchDecoration = InputDecoration(
+  border: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: Color.fromRGBO(173, 173, 173, 150),
+    ),
+    borderRadius: BorderRadius.circular(10.0),
+  ),
+);
 
 TextStyle textCompanyTextStyle = const TextStyle(
     fontFamily: 'OpenSans', fontSize: 14, color: Color.fromRGBO(30, 30, 30, 1));
@@ -162,3 +162,48 @@ TextStyle textCompanyItemsStyle = const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w800,
     color: Color.fromRGBO(30, 30, 30, 1));
+
+TextStyle textQuizTitle = const TextStyle(
+    fontFamily: 'OpenSans',
+    fontSize: 30,
+    color: Color.fromRGBO(73, 66, 228, 1),
+    fontWeight: FontWeight.bold);
+
+TextStyle textQuizTextTitle = const TextStyle(
+  fontFamily: 'OpenSans',
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);
+
+TextStyle textQuizTitlePage = const TextStyle(
+  fontFamily: 'OpenSans',
+  fontSize: 25,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);
+
+TextStyle textQuizText = const TextStyle(
+  fontFamily: 'OpenSans',
+  fontSize: 14,
+  color: Colors.black,
+);
+
+TextStyle textQuizTextDesc = const TextStyle(
+  fontFamily: 'OpenSans',
+  fontSize: 14,
+  color: Color.fromARGB(148, 0, 0, 0),
+);
+
+TextStyle tagNameQuiz = const TextStyle(
+  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+  color: Color.fromRGBO(151, 71, 255, 1),
+);
+
+TextStyle quizButtonText = const TextStyle(
+    fontFamily: 'OpenSans',
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    fontSize: 20);
