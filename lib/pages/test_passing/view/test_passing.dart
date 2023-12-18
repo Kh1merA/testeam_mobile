@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testeam_mobile_application/connections/connection.dart';
 import 'package:testeam_mobile_application/connections/quizPassing.dart';
-import 'package:testeam_mobile_application/pages/test_passing/widgets/single_answer.dart';
+import 'package:testeam_mobile_application/pages/test_passing/widgets/answer.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
 import 'package:testeam_mobile_application/pages/login_page/widgets/input_label.dart';
 
@@ -20,6 +20,7 @@ class test_passing extends StatefulWidget {
 class _test_passingState extends State<test_passing> {
   late QuizPassing quizPassing;
   late String userToken;
+  int index = 0;
 
   @override
   void initState() {
@@ -75,7 +76,19 @@ class _test_passingState extends State<test_passing> {
           ),
           Padding(
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-              child: single_answer(questionInfo: quizPassing.questions[0]))
+              child: answer(questionInfo: quizPassing.questions[index])),
+          SizedBox(
+            height: 20,
+          ),
+          TextButton(
+            style: flatButtonStyle,
+            onPressed: () {
+              setState(() {
+                index += 1;
+              });
+            },
+            child: Text('Next question', style: quizButtonText),
+          )
         ],
       ),
     );

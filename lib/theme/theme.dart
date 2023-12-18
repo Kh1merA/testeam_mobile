@@ -79,6 +79,21 @@ final ButtonStyle blackFlatButtonStyle = TextButton.styleFrom(
   ),
 );
 
+final ButtonStyle greenMainPageButton = TextButton.styleFrom(
+  backgroundColor: Color.fromARGB(255, 68, 227, 160),
+  minimumSize: Size(85, 26),
+  padding: EdgeInsets.symmetric(horizontal: 16),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(9)),
+  ),
+);
+
+TextStyle mainPageGoToTest = TextStyle(
+    fontFamily: 'OpenSans',
+    fontSize: 12,
+    color: Colors.black,
+    fontWeight: FontWeight.bold);
+
 TextStyle profileTitleText = const TextStyle(
   fontSize: 36,
   fontFamily: "OpenSans",
