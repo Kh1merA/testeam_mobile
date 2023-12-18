@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testeam_mobile_application/connections/question.dart';
 import 'package:testeam_mobile_application/connections/quizPassing.dart';
+import 'package:testeam_mobile_application/pages/loading_page/loading.dart';
 import 'package:testeam_mobile_application/pages/test_passing/view/test_result.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
+
+enum LoadingStatus {
+  loading,
+  loaded,
+}
+
+LoadingStatus _loadingStatus = LoadingStatus.loading;
 
 class test_passing extends StatefulWidget {
   final int quiz_id;
@@ -73,6 +81,7 @@ class _test_passingState extends State<test_passing> {
     print('Token: $quizID');
     await quizPassing.getQuizInfo(userToken, quizID);
     print(quizPassing);
+    _loadingStatus = LoadingStatus.loaded;
     setState(() {});
   }
 
@@ -88,7 +97,16 @@ class _test_passingState extends State<test_passing> {
   }
 
   @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
+  if (_loadingStatus == LoadingStatus.loading) {
+    return Loading();
+  } else {
+    return _buildQuizListWidget();
+  }
+}
+
+  @override
+  Widget _buildQuizListWidget() {
     return Scaffold(
       body: Column(
         children: [

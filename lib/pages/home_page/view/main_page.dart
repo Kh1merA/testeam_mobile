@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testeam_mobile_application/connections/company.dart';
 import 'package:testeam_mobile_application/pages/home_page/view/home_page.dart';
+import 'package:testeam_mobile_application/pages/home_page/widgets/test_page.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
 
 class main_page extends StatefulWidget {
@@ -38,7 +39,7 @@ class _MainPageState extends State<main_page> {
                 color: Color.fromARGB(255, 73, 66, 228),
               ),
               width: 350,
-              height: 135,
+              height: 145,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -61,7 +62,6 @@ class _MainPageState extends State<main_page> {
                         ),
                         TextButton(
                           onPressed: () {
-                            // Обработчик нажатия кнопки
                           },
                           child: Text(
                             'Go to Tests',
@@ -77,7 +77,7 @@ class _MainPageState extends State<main_page> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Container(
               decoration: BoxDecoration(

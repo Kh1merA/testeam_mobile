@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testeam_mobile_application/connections/quizzes.dart';
 import 'package:testeam_mobile_application/pages/home_page/widgets/test_container.dart';
+import 'package:testeam_mobile_application/pages/loading_page/loading.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
+
+enum LoadingStatus {
+  loading,
+  loaded,
+}
+
+LoadingStatus _loadingStatus = LoadingStatus.loading;
 
 class test_page extends StatefulWidget {
   const test_page({
@@ -30,6 +38,7 @@ class _test_pageState extends State<test_page> {
     await _loadToken();
     print('Token: $companyId');
     await quizzesInfo.getQuizInfoForMe(userToken, companyId);
+    _loadingStatus = LoadingStatus.loaded;
     setState(() {});
   }
 
@@ -45,9 +54,16 @@ class _test_pageState extends State<test_page> {
       });
     }
   }
-
   @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
+  if (_loadingStatus == LoadingStatus.loading) {
+    return Loading();
+  } else {
+    return _buildQuizListWidget();
+  }
+}
+
+  Widget _buildQuizListWidget() {
     return Scaffold(
       body: Column(
         children: [
