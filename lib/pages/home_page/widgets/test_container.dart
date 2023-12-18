@@ -1,11 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testeam_mobile_application/connections/quiz.dart';
+import 'package:testeam_mobile_application/connections/quizzes.dart';
 import 'package:testeam_mobile_application/pages/home_page/widgets/tag_box.dart';
+import 'package:testeam_mobile_application/pages/test_passing/view/test_passing.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
 
-class test_container extends StatelessWidget {
-  test_container({
-    Key? key,
-  }) : super(key: key);
+class test_container extends StatefulWidget {
+  Map<String, dynamic> quizInfo;
+  test_container({Key? key, required this.quizInfo}) : super(key: key);
+
+  @override
+  State<test_container> createState() => _test_containerState();
+}
+
+class _test_containerState extends State<test_container> {
+  late Quiz quizInfo;
+  @override
+  @override
+  void initState() {
+    super.initState();
+    _initializeQuizInfo();
+  }
+
+  void _initializeQuizInfo() {
+    quizInfo = Quiz(
+      id: widget.quizInfo['id'],
+      title: widget.quizInfo['title'],
+      start_date: widget.quizInfo['start_date'],
+      end_date: widget.quizInfo['end_date'],
+      start_time: widget.quizInfo['start_time'],
+      end_time: widget.quizInfo['end_time'],
+      tags: widget.quizInfo['tags'] ?? [],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +49,7 @@ class test_container extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Test title',
+              quizInfo.title,
               style: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,
@@ -32,24 +60,14 @@ class test_container extends StatelessWidget {
               children: [
                 Text('Start date:', style: textQuizTextTitle),
                 SizedBox(width: 10),
-                Text('Tuesday, 21.11.2023, 10:00', style: textQuizText)
+                Text(quizInfo.start_date, style: textQuizText)
               ],
             ),
             Row(
               children: [
                 Text('End date:', style: textQuizTextTitle),
                 SizedBox(width: 10),
-                Text('Tuesday, 21.11.2023, 10:00', style: textQuizText)
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  'Time Limit:',
-                  style: textQuizTextTitle,
-                ),
-                SizedBox(width: 10),
-                Text('30m', style: textQuizText)
+                Text(quizInfo.end_date, style: textQuizText)
               ],
             ),
             Text(
@@ -63,7 +81,7 @@ class test_container extends StatelessWidget {
               width: 300,
               height: 50,
               child: Row(
-                children: [TagBox(tagText: 'Front-end')],
+                children: [TagBox(tagText: quizInfo.tags[0]['title'])],
               ),
             ),
             SizedBox(
@@ -71,7 +89,14 @@ class test_container extends StatelessWidget {
             ),
             TextButton(
               style: flatButtonStyle,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => test_passing(quiz_id: quizInfo.id),
+                  ),
+                );
+              },
               child: Text('Start test', style: quizButtonText),
             )
           ],

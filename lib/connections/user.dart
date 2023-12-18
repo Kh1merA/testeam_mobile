@@ -61,8 +61,6 @@ class User {
       final company = responseData['companies'][0];
       companyName = company['title'];
       position = company['role'];
-      // companyName = 'Valorant';
-      // position = 'Healer';
     } else {
       throw Exception('Failed to load user info');
     }
