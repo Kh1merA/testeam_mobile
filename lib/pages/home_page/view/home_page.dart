@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testeam_mobile_application/connections/connection.dart';
+import 'package:testeam_mobile_application/pages/home_page/view/main_page.dart';
 import 'package:testeam_mobile_application/pages/home_page/widgets/widgets.dart';
 import 'package:testeam_mobile_application/pages/login_page/view/login_page.dart';
 import 'package:testeam_mobile_application/pages/user_page/view/user_page.dart';
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
 
     final tabs = [
       const Center(
-        child: Text('1'),
+        child: main_page(),
       ),
       const Center(
         child: test_page(),

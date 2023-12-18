@@ -60,8 +60,21 @@ class _test_pageState extends State<test_page> {
           ),
           Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
-              child: test_container(quizInfo: quizzesInfo.quizzes[0])),
+                  const EdgeInsets.symmetric(horizontal: 30.0),
+              child: Container(
+                width: 500,
+                height: 600,
+                child:
+                  ListView.builder(
+  itemCount: quizzesInfo.quizzes.length,
+  itemBuilder: (context, index) {
+    return test_container(quizInfo: quizzesInfo.quizzes[index]);
+  },
+  physics: AlwaysScrollableScrollPhysics(),
+      shrinkWrap: true,
+)
+                ),
+          ),
         ],
       ),
     );

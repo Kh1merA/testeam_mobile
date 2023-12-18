@@ -37,71 +37,78 @@ class _test_containerState extends State<test_container> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: Color.fromRGBO(73, 66, 228, 1),
-            width: 2,
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(20))),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        child: Column(
-          children: [
-            Text(
-              quizInfo.title,
-              style: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(73, 66, 228, 1),
-                  fontSize: 25),
-            ),
-            Row(
-              children: [
-                Text('Start date:', style: textQuizTextTitle),
-                SizedBox(width: 10),
-                Text(quizInfo.start_date, style: textQuizText)
-              ],
-            ),
-            Row(
-              children: [
-                Text('End date:', style: textQuizTextTitle),
-                SizedBox(width: 10),
-                Text(quizInfo.end_date, style: textQuizText)
-              ],
-            ),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...',
-              style: textQuizTextDesc,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: 300,
-              height: 50,
-              child: Row(
-                children: [TagBox(tagText: quizInfo.tags[0]['title'])],
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromRGBO(73, 66, 228, 1),
+                width: 2,
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextButton(
-              style: flatButtonStyle,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => test_passing(quiz_id: quizInfo.id),
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            child: Column(
+              children: [
+                Text(
+                  quizInfo.title,
+                  style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(73, 66, 228, 1),
+                      fontSize: 25),
+                ),
+                Row(
+                  children: [
+                    Text('Start date:', style: textQuizTextTitle),
+                    SizedBox(width: 10),
+                    Text(quizInfo.start_date, style: textQuizText)
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('End date:', style: textQuizTextTitle),
+                    SizedBox(width: 10),
+                    Text(quizInfo.end_date, style: textQuizText)
+                  ],
+                ),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...',
+                  style: textQuizTextDesc,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: 300,
+                  height: 50,
+                  child: Row(
+                    children: [TagBox(tagText: quizInfo.tags[0]['title'])],
                   ),
-                );
-              },
-              child: Text('Start test', style: quizButtonText),
-            )
-          ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextButton(
+                  style: flatButtonStyle,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => test_passing(quiz_id: quizInfo.id),
+                      ),
+                    );
+                  },
+                  child: Text('Start test', style: quizButtonText),
+                )
+              ],
+            ),
+          ),
         ),
-      ),
+        SizedBox(
+              height: 20,
+            )
+      ],
     );
   }
 }

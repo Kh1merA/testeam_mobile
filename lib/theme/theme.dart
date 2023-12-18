@@ -88,6 +88,15 @@ final ButtonStyle greenMainPageButton = TextButton.styleFrom(
   ),
 );
 
+final ButtonStyle blackMainPageButton = TextButton.styleFrom(
+  backgroundColor: Color.fromARGB(255, 0, 0, 0),
+  minimumSize: Size(103, 26),
+  padding: EdgeInsets.symmetric(horizontal: 16),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(9)),
+  ),
+);
+
 TextStyle mainPageGoToTest = TextStyle(
     fontFamily: 'OpenSans',
     fontSize: 12,
