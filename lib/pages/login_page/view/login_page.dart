@@ -55,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _saveToken(String token, User user, CompanyProfile companyProfile) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
     prefs.setString('token', token);
     prefs.setString('user', json.encode(user.toJson()));
     prefs.setString('companyId', companyProfile.companyId.toString());

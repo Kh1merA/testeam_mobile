@@ -44,7 +44,7 @@ class _test_passingState extends State<test_passing> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => test_result(result: result, test_lenght: quizPassing.questions.length, testTitle: quizPassing.title,),
+          builder: (context) => test_result(result: result, test_lenght: quizPassing.questions.length, testTitle: quizPassing.title, test_id: widget.quiz_id),
         ),
       );
     }

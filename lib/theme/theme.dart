@@ -70,6 +70,15 @@ final ButtonStyle flatButtonStyle = TextButton.styleFrom(
   ),
 );
 
+final ButtonStyle unnableButtonStyle = TextButton.styleFrom(
+  backgroundColor: Color.fromARGB(255, 103, 103, 103),
+  minimumSize: const Size(160, 50),
+  padding: const EdgeInsets.symmetric(horizontal: 16),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(18)),
+  ),
+);
+
 final ButtonStyle blackFlatButtonStyle = TextButton.styleFrom(
   backgroundColor: Color.fromARGB(255, 0, 0, 0),
   minimumSize: const Size(160, 50),

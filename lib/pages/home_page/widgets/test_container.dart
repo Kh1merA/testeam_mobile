@@ -16,12 +16,16 @@ class test_container extends StatefulWidget {
   State<test_container> createState() => _test_containerState();
 }
 class _test_containerState extends State<test_container> {
+
+  bool isTestUnable = false;
   
   late Quiz quizInfo;
   @override
   void initState() {
     super.initState();
     _initializeQuizInfo();
+    checkIfKeyExists(quizInfo.id);
+
   }
 
   void _initializeQuizInfo() {
@@ -35,6 +39,31 @@ class _test_containerState extends State<test_container> {
       tags: widget.quizInfo['tags'] ?? [],
     );
   }
+
+  Future<void> checkIfKeyExists(int key) async {
+  final prefs = await SharedPreferences.getInstance();
+  bool keyExists = prefs.containsKey(key.toString());
+
+  if (keyExists) {
+isTestUnable = true;
+  } else {
+   isTestUnable = false;
+  }
+
+  setState(() {
+      isTestUnable = keyExists;
+    });
+}
+
+  ButtonStyle getButtonColor() {
+    if(!isTestUnable) {
+      return unnableButtonStyle;
+    }
+    else {
+      return flatButtonStyle;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -91,13 +120,8 @@ class _test_containerState extends State<test_container> {
                   height: 20,
                 ),
                 TextButton(
-                  style: flatButtonStyle,
-                  onPressed: () {Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => test_passing(quiz_id: quizInfo.id),
-      ),
-    );},
+                  style: isTestUnable?unnableButtonStyle:flatButtonStyle,
+                  onPressed: () {isTestUnable? null : coolMethod(context);},
                   child: Text('Start test', style: quizButtonText),
                 )
               ],
@@ -109,5 +133,16 @@ class _test_containerState extends State<test_container> {
             )
       ],
     );
+  }
+
+  void coolMethod(BuildContext context) {
+    Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => test_passing(quiz_id: quizInfo.id),
+          ),
+        );
+        setState(() {
+            });
   }
 }

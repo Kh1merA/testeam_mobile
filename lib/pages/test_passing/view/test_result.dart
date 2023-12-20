@@ -13,7 +13,8 @@ class test_result extends StatefulWidget {
   int result;
   int test_lenght;
   String testTitle;
-  test_result({Key? key, required this.result, required this.test_lenght, required this.testTitle}) : super(key: key);
+  int test_id;
+  test_result({Key? key, required this.result, required this.test_lenght, required this.testTitle, required this.test_id}) : super(key: key);
 
   @override
   _TestResultState createState() => _TestResultState();
@@ -31,6 +32,7 @@ class test_result extends StatefulWidget {
   @override
   void initState() {
     super.initState();
+    _saveResult(widget.test_id);
 
     showRes = widget.result.toString();
     allQuestion = widget.test_lenght.toString();
@@ -51,6 +53,11 @@ class test_result extends StatefulWidget {
     } else {
       return Colors.red; // Red color for FAILED
     }
+  }
+
+  _saveResult(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(id.toString(), 'true');
   }
 
   @override
