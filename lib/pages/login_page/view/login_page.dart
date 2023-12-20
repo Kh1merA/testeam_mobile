@@ -115,21 +115,6 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: 10,
           ),
-          Container(
-            padding: const EdgeInsets.only(right: 35.0),
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed('/recovery_password');
-                },
-                child: Text(
-                  'Forgot your password?',
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
-            ),
-          ),
           const SizedBox(
             height: 74,
           ),

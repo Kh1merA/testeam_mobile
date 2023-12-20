@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testeam_mobile_application/connections/company.dart';
 import 'package:testeam_mobile_application/pages/home_page/view/home_page.dart';
+import 'package:testeam_mobile_application/pages/home_page/widgets/test_page.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
 
 class test_result extends StatefulWidget {
@@ -25,6 +26,7 @@ class test_result extends StatefulWidget {
   String allQuestion = '';
   String testName = '';
   String successPercent = '';
+  double percent = 0;
 
   @override
   void initState() {
@@ -33,14 +35,15 @@ class test_result extends StatefulWidget {
     showRes = widget.result.toString();
     allQuestion = widget.test_lenght.toString();
     testName = widget.testTitle.toString();
+    percent = (widget.result/widget.test_lenght)*100;
     successPercent = ((widget.result/widget.test_lenght)*100).toString();
     
-    if(widget.result > widget.test_lenght - 3) {
+    if(percent >= 50) {
       testStatus = 'PASSED';
+    } else {
+      testStatus = 'FAILED';
     }
   }
-
-
 
   Color getStatusColor() {
     if (testStatus == 'PASSED') {
@@ -53,6 +56,26 @@ class test_result extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          },
+        ),
+        backgroundColor:
+            Theme.of(context).colorScheme.background.withOpacity(0.8),
+        surfaceTintColor: Colors.transparent,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              color: Colors.transparent,
+            ),
+          ),
+        ),
+      ),
       body: Center(
         child: Container(
           child: Column(

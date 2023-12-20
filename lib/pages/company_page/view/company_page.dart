@@ -63,11 +63,30 @@ class _UserPageState extends State<company_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/user_page');
+          },
+        ),
+        backgroundColor:
+            Theme.of(context).colorScheme.background.withOpacity(0.8),
+        surfaceTintColor: Colors.transparent,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              color: Colors.transparent,
+            ),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-              height: 100,
+              height: 10,
             ),
             Container(
               width: 350,

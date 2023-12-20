@@ -6,12 +6,6 @@ import 'package:testeam_mobile_application/pages/home_page/widgets/tag_box.dart'
 import 'package:testeam_mobile_application/pages/test_passing/view/test_passing.dart';
 import 'package:testeam_mobile_application/theme/theme.dart';
 
-enum LoadingStatus {
-  loading,
-  loaded,
-}
-
-LoadingStatus _loadingStatus = LoadingStatus.loading;
 
 class test_container extends StatefulWidget {
   Map<String, dynamic> quizInfo;
@@ -21,10 +15,9 @@ class test_container extends StatefulWidget {
   @override
   State<test_container> createState() => _test_containerState();
 }
-
 class _test_containerState extends State<test_container> {
+  
   late Quiz quizInfo;
-  @override
   @override
   void initState() {
     super.initState();
@@ -41,7 +34,6 @@ class _test_containerState extends State<test_container> {
       end_time: widget.quizInfo['end_time'],
       tags: widget.quizInfo['tags'] ?? [],
     );
-    _loadingStatus = LoadingStatus.loaded;
   }
 
   @override
@@ -100,14 +92,12 @@ class _test_containerState extends State<test_container> {
                 ),
                 TextButton(
                   style: flatButtonStyle,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => test_passing(quiz_id: quizInfo.id),
-                      ),
-                    );
-                  },
+                  onPressed: () {Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => test_passing(quiz_id: quizInfo.id),
+      ),
+    );},
                   child: Text('Start test', style: quizButtonText),
                 )
               ],

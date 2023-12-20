@@ -130,30 +130,6 @@ class _UserPageState extends State<user_page> {
                       inputIcon: Icon(Icons.account_box),
                       inputText: userData.position),
                   const SizedBox(
-                    width: 35,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconTheme(
-                          data: iconProfileTheme,
-                          child: Icon(Icons.compare_arrows)),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/user_page/edit_password');
-                      },
-                      child: Text(
-                        'Change password',
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
-                    ),
-                      
-                    ],
-                  ),
-                  const SizedBox(
                     height: 30,
                   ),
                   TextButton(

@@ -57,6 +57,7 @@ class _test_passingState extends State<test_passing> {
 
   @override
   void initState() {
+    _loadingStatus = LoadingStatus.loading;
     super.initState();
     userToken = '';
     quizPassing = QuizPassing(
@@ -96,7 +97,7 @@ class _test_passingState extends State<test_passing> {
     }
   }
 
-  @override
+@override
 Widget build(BuildContext context) {
   if (_loadingStatus == LoadingStatus.loading) {
     return Loading();
@@ -105,8 +106,7 @@ Widget build(BuildContext context) {
   }
 }
 
-  @override
-  Widget _buildQuizListWidget() {
+Widget _buildQuizListWidget() {
     return Scaffold(
       body: Column(
         children: [
